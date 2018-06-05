@@ -3,14 +3,14 @@
 
 package ru.volha.hustle.ivarastudio.data.repository;
 
-import io.reactivex.Flowable;
+import io.reactivex.Single;
 import ru.volha.hustle.ivarastudio.data.User;
 
 public interface DataSource {
 
-    Flowable<User> getUserInfo();
+    Single<User> getUserInfo();
 
-    Flowable<User> getAndSaveUserInfo(String login, String pwd);
+    Single<User> getAndSaveUserInfo(String login, String pwd);
 
     void saveUser(User user);
 }

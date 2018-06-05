@@ -6,7 +6,7 @@ package ru.volha.hustle.ivarastudio.data.repository;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.reactivex.Flowable;
+import io.reactivex.Single;
 import ru.volha.hustle.ivarastudio.data.User;
 
 @Singleton
@@ -24,15 +24,15 @@ public class Repository implements DataSource {
 
 
     @Override
-    public Flowable<User> getUserInfo() {
+    public Single<User> getUserInfo() {
         return null;
     }
 
     @Override
-    public Flowable<User> getAndSaveUserInfo(String login, String pwd) {
+    public Single<User> getAndSaveUserInfo(String login, String pwd) {
         return mRemoteDataSource
                 .getAndSaveUserInfo(login, pwd)
-                .doOnNext(mLocalDataSource::saveUser);
+                .doOnSuccess(mLocalDataSource::saveUser);
     }
 
     @Override

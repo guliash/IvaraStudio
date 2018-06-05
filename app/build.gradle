@@ -74,9 +74,12 @@ dependencies {
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
 //    implementation "com.squareup.sqlbrite2:sqlbrite:$rootProject.sqlbriteVersion"
     implementation "com.google.guava:guava:$rootProject.guavaVersion"
-    compile "android.arch.persistence.room:runtime:$rootProject.roomVersion"
+//    compile "android.arch.persistence.room:runtime:$rootProject.roomVersion"
 
     // Dagger dependencies
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"

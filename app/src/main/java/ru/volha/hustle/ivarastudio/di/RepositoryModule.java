@@ -9,10 +9,12 @@ import javax.inject.Singleton;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
+import retrofit2.Retrofit;
 import ru.volha.hustle.ivarastudio.data.repository.DataSource;
 import ru.volha.hustle.ivarastudio.data.repository.Local;
 import ru.volha.hustle.ivarastudio.data.repository.Remote;
 import ru.volha.hustle.ivarastudio.data.repository.local.LocalDataSource;
+import ru.volha.hustle.ivarastudio.data.repository.remote.RemoteApi;
 import ru.volha.hustle.ivarastudio.data.repository.remote.RemoteDataSource;
 
 /**
@@ -24,6 +26,21 @@ abstract public class RepositoryModule {
     private static final String PREFERENCES_NAME = "ivara_sp";
 
     @Singleton
+    @Provides
+    static SharedPreferences provideSharedPreferences(Application context) {
+        return context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+    }
+
+    @Singleton
+    @Provides
+    static RemoteApi provideRemoteApi() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(RemoteApi.BASE_URL)
+                .build();
+        return retrofit.create(RemoteApi.class);
+    }
+
+    @Singleton
     @Binds
     @Local
     abstract DataSource provideLocalDataSource(LocalDataSource dataSource);
@@ -32,12 +49,6 @@ abstract public class RepositoryModule {
     @Binds
     @Remote
     abstract DataSource provideRemoteDataSource(RemoteDataSource dataSource);
-
-    @Singleton
-    @Provides
-    static SharedPreferences provideSharedPreferences(Application context) {
-        return context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-    }
 
 //    @Singleton
 //    @Provides

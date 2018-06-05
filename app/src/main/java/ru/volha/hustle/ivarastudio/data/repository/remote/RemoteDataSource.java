@@ -5,28 +5,32 @@ package ru.volha.hustle.ivarastudio.data.repository.remote;
 
 import javax.inject.Inject;
 
-import io.reactivex.Flowable;
+import io.reactivex.Single;
 import ru.volha.hustle.ivarastudio.data.User;
 import ru.volha.hustle.ivarastudio.data.repository.DataSource;
 
 public class RemoteDataSource implements DataSource {
 
+    private final RemoteApi mApi;
+
     @Inject
-    public RemoteDataSource() {
+    public RemoteDataSource(RemoteApi mApi) {
+        this.mApi = mApi;
     }
 
     @Override
-    public Flowable<User> getUserInfo() {
+    public Single<User> getUserInfo() {
         return null;
     }
 
     @Override
-    public Flowable<User> getAndSaveUserInfo(String login, String pwd) {
-        return null;
+    public Single<User> getAndSaveUserInfo(String login, String pwd) {
+        return mApi.getUser(login, pwd)
+                .map(userResponse -> new User(userResponse.ID, login, pwd));
     }
 
     @Override
     public void saveUser(User user) {
-
+        // save only in local
     }
 }
