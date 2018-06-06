@@ -5,10 +5,11 @@ package ru.volha.hustle.ivarastudio;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
+import ru.volha.hustle.ivarastudio.di.DaggerAppComponent;
 
 public class App extends DaggerApplication{
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        return null;//DaggerAppComponent.builder().application(this).build();
+        return DaggerAppComponent.builder().application(this).build();
     }
 }

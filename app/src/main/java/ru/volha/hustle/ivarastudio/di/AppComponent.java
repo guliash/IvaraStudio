@@ -22,9 +22,11 @@ import ru.volha.hustle.ivarastudio.data.repository.Repository;
 @Singleton
 @Component(modules = {RepositoryModule.class,
         ApplicationModule.class,
-        ActivityBindingModule.class,
+        MainActivityModule.class,
         AndroidSupportInjectionModule.class})
 public interface AppComponent extends AndroidInjector<App> {
+
+    void inject(App app);
 
     Repository getRepository();
 
