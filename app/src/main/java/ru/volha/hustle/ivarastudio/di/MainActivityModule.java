@@ -3,7 +3,13 @@ package ru.volha.hustle.ivarastudio.di;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import ru.volha.hustle.ivarastudio.MainActivity;
+import ru.volha.hustle.ivarastudio.contacts.ContactsModule;
+import ru.volha.hustle.ivarastudio.news.NewsModule;
+import ru.volha.hustle.ivarastudio.places.PlacesModule;
+import ru.volha.hustle.ivarastudio.schedule.ScheduleModule;
+import ru.volha.hustle.ivarastudio.settings.SettingsModule;
 import ru.volha.hustle.ivarastudio.user_profile.UserProfileModule;
+import ru.volha.hustle.ivarastudio.video.VideoModule;
 
 /**
  * We want Dagger.Android to create a Subcomponent which has a parent Component of whichever module ActivityBindingModule is on,
@@ -16,6 +22,8 @@ import ru.volha.hustle.ivarastudio.user_profile.UserProfileModule;
 public abstract class MainActivityModule {
 
     @ActivityScoped
-    @ContributesAndroidInjector(modules = UserProfileModule.class)
+    @ContributesAndroidInjector(modules = {
+            UserProfileModule.class, NewsModule.class, ScheduleModule.class, ContactsModule.class,
+            VideoModule.class, PlacesModule.class, SettingsModule.class})
     abstract MainActivity mainActivity();
 }

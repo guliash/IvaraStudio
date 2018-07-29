@@ -1,6 +1,13 @@
 <resources>
-    <string name="app_name">IvaraStudio</string>
-    <string name="navigation_view_header_title">IvaraStudio</string>
+    <string name="app_name">Ivara Studio</string>
+    <string name="navigation_view_header_title">Ivara Studio</string>
+    <string name="menu_main">Главная</string>
+    <string name="menu_schedule">Расписание</string>
+    <string name="menu_video">Учебное видео</string>
+    <string name="menu_placed">Залы</string>
+    <string name="menu_contact">Связаться</string>
+    <string name="menu_settings">Уведомления</string>
+    <string name="menu_profile">Профиль</string>
 
     <!-- USER PROFILE -->
     <string name="user_profile_login_hint">Логин</string>
