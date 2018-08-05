@@ -3,14 +3,16 @@
 
 package ru.volha.hustle.ivarastudio.news;
 
+import dagger.Binds;
 import dagger.Module;
-import dagger.android.ContributesAndroidInjector;
+import ru.volha.hustle.ivarastudio.BasePresenter;
 import ru.volha.hustle.ivarastudio.di.FragmentScoped;
 
 @Module
 public abstract class NewsModule {
 
+
     @FragmentScoped
-    @ContributesAndroidInjector
-    abstract NewsFragment newsFragment();
+    @Binds
+    abstract BasePresenter<NewsFragment> newsPresenter(NewsPresenter presenter);
 }

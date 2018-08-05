@@ -3,8 +3,11 @@
 
 package ru.volha.hustle.ivarastudio;
 
-public interface BasePresenter {
+public interface BasePresenter<T> {
 
+    void bind(T view);
     void start();
+
+    void end();
 
 }

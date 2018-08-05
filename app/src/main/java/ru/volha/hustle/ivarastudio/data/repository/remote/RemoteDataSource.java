@@ -3,9 +3,13 @@
 
 package ru.volha.hustle.ivarastudio.data.repository.remote;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import io.reactivex.Flowable;
 import io.reactivex.Single;
+import ru.volha.hustle.ivarastudio.data.News;
 import ru.volha.hustle.ivarastudio.data.User;
 import ru.volha.hustle.ivarastudio.data.repository.DataSource;
 
@@ -32,5 +36,10 @@ public class RemoteDataSource implements DataSource {
     @Override
     public void saveUser(User user) {
         // save only in local
+    }
+
+    @Override
+    public Flowable<List<News>> getNews() {
+        return null;
     }
 }

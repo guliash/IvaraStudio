@@ -10,6 +10,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -51,6 +54,9 @@ public class MainActivity extends DaggerAppCompatActivity implements NavigationV
     @BindView(R.id.nav_view)
     NavigationView mNavigationView;
 
+    View mProfileView;
+    ImageView mUserAvatar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +84,19 @@ public class MainActivity extends DaggerAppCompatActivity implements NavigationV
         }
         if (savedInstanceState == null) {
             openNewsFragment();
+            mNavigationView.setCheckedItem(R.id.menu_main);
         }
+        mProfileView = mNavigationView.getHeaderView(0);
+        mUserAvatar = mProfileView.findViewById(R.id.user_avatar);
+        mProfileView.setOnClickListener(v -> {
+            openUserProfileFragment();
+            mDrawerLayout.closeDrawers();
+        });
+        loginAndInit();
+    }
+
+    public void loginAndInit() {
+        Picasso.get().load("https://pp.userapi.com/c624223/v624223722/173c9/GOZ19TJSIrI.jpg").into(mUserAvatar);
     }
 
     @Override

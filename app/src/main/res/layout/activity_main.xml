@@ -22,7 +22,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:background="?attr/colorPrimary"
                 android:fitsSystemWindows="true"
                 android:minHeight="?attr/actionBarSize"
@@ -34,7 +34,8 @@
         <FrameLayout
             android:id="@+id/contentFrame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="56dp" />
 
     </android.support.design.widget.CoordinatorLayout>
 

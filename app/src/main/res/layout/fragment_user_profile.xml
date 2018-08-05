@@ -10,26 +10,4 @@
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_launcher_background" />
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/login"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/user_profile_login_hint" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/user_profile_pwd_hint" />
-    </android.support.design.widget.TextInputLayout>
 </LinearLayout>

@@ -12,4 +12,8 @@
     <!-- USER PROFILE -->
     <string name="user_profile_login_hint">Логин</string>
     <string name="user_profile_pwd_hint">Пароль</string>
+
+    <!-- NEWS -->
+    <string name="news_all">ВСЕ НОВОСТИ</string>
+    <string name="news_recommends">РЕКОМЕНДАЦИИ</string>
 </resources>

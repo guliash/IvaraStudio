@@ -3,10 +3,14 @@
 
 package ru.volha.hustle.ivarastudio.data.repository;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Flowable;
 import io.reactivex.Single;
+import ru.volha.hustle.ivarastudio.data.News;
 import ru.volha.hustle.ivarastudio.data.User;
 
 @Singleton
@@ -17,7 +21,7 @@ public class Repository implements DataSource {
 
     @Inject
     Repository(@Remote DataSource remoteDataSource,
-                    @Local DataSource localDataSource) {
+               @Local DataSource localDataSource) {
         mRemoteDataSource = remoteDataSource;
         mLocalDataSource = localDataSource;
     }
@@ -25,7 +29,7 @@ public class Repository implements DataSource {
 
     @Override
     public Single<User> getUserInfo() {
-        return null;
+        return mLocalDataSource.getUserInfo();
     }
 
     @Override
@@ -38,5 +42,10 @@ public class Repository implements DataSource {
     @Override
     public void saveUser(User user) {
         mLocalDataSource.saveUser(user);
+    }
+
+    @Override
+    public Flowable<List<News>> getNews() {
+        return mLocalDataSource.getNews();
     }
 }

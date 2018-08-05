@@ -4,6 +4,7 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import ru.volha.hustle.ivarastudio.MainActivity;
 import ru.volha.hustle.ivarastudio.contacts.ContactsModule;
+import ru.volha.hustle.ivarastudio.news.NewsFragment;
 import ru.volha.hustle.ivarastudio.news.NewsModule;
 import ru.volha.hustle.ivarastudio.places.PlacesModule;
 import ru.volha.hustle.ivarastudio.schedule.ScheduleModule;
@@ -26,4 +27,9 @@ public abstract class MainActivityModule {
             UserProfileModule.class, NewsModule.class, ScheduleModule.class, ContactsModule.class,
             VideoModule.class, PlacesModule.class, SettingsModule.class})
     abstract MainActivity mainActivity();
+
+    @FragmentScoped
+    @ContributesAndroidInjector
+    abstract NewsFragment newsFragment();
+
 }
