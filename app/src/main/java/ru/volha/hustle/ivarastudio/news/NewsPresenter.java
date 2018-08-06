@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -32,9 +33,9 @@ public class NewsPresenter implements BasePresenter<NewsFragment> {
             mView.setLoadingIndicator(true);
         }
 
-        Disposable disposable = mRepository.getNews()
-                .subscribeOn(Schedulers.computation())
-                .observeOn(Schedulers.io())
+        Disposable disposable = mRepository.getNews(forceUpdate)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(news -> mView.updateNews(news, news));
         mCompositeDisposable.add(disposable);
     }
@@ -51,6 +52,6 @@ public class NewsPresenter implements BasePresenter<NewsFragment> {
 
     @Override
     public void end() {
-
+        mCompositeDisposable.clear();
     }
 }

@@ -9,7 +9,12 @@ import javax.inject.Singleton;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Credentials;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import ru.volha.hustle.ivarastudio.data.repository.DataSource;
 import ru.volha.hustle.ivarastudio.data.repository.Local;
 import ru.volha.hustle.ivarastudio.data.repository.Remote;
@@ -34,8 +39,22 @@ abstract public class RepositoryModule {
     @Singleton
     @Provides
     static RemoteApi provideRemoteApi() {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .authenticator((route, response) -> {
+                    Request request = response.request();
+                    if (request.header("Authorization") != null)
+                        // Логин и пароль неверны
+                        return null;
+                    return request.newBuilder()
+                            .header("Authorization", Credentials.basic("ws", "ws"))
+                            .build();
+                })
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(RemoteApi.BASE_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
         return retrofit.create(RemoteApi.class);
     }

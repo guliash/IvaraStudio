@@ -26,6 +26,7 @@ import ru.volha.hustle.ivarastudio.places.PlacesFragment;
 import ru.volha.hustle.ivarastudio.schedule.ScheduleFragment;
 import ru.volha.hustle.ivarastudio.settings.SettingsFragment;
 import ru.volha.hustle.ivarastudio.user_profile.UserProfileFragment;
+import ru.volha.hustle.ivarastudio.util.CropCircleTransformation;
 import ru.volha.hustle.ivarastudio.video.VideoFragment;
 
 public class MainActivity extends DaggerAppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -96,7 +97,9 @@ public class MainActivity extends DaggerAppCompatActivity implements NavigationV
     }
 
     public void loginAndInit() {
-        Picasso.get().load("https://pp.userapi.com/c624223/v624223722/173c9/GOZ19TJSIrI.jpg").into(mUserAvatar);
+        Picasso.get().load("https://pp.userapi.com/c624223/v624223722/173c9/GOZ19TJSIrI.jpg")
+                .transform(new CropCircleTransformation())
+                .into(mUserAvatar);
     }
 
     @Override

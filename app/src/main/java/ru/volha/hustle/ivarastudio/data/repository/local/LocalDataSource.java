@@ -32,15 +32,15 @@ public class LocalDataSource implements DataSource {
         mGson = new Gson();
     }
 
+//
+//    @Override
+//    public Single<User> getUserInfo() {
+//        String json = mSharedPreferences.getString(USER, null);
+//        return json == null ? null : Single.just(mGson.fromJson(json, User.class));
+//    }
 
     @Override
-    public Single<User> getUserInfo() {
-        String json = mSharedPreferences.getString(USER, null);
-        return json == null ? null : Single.just(mGson.fromJson(json, User.class));
-    }
-
-    @Override
-    public Single<User> getAndSaveUserInfo(String login, String pwd) {
+    public Single<User> getUserInfo(String login, String pwd) {
         return null;
     }
 
@@ -56,7 +56,7 @@ public class LocalDataSource implements DataSource {
     }
 
     @Override
-    public Flowable<List<News>> getNews() {
+    public Flowable<List<News>> getNews(boolean forceUpdate) {
         List<News> news = new ArrayList<>();
         News general = new News(NewsType.GENERAL, "Новые наборы по дискофоксу!",
                 "Тот, кто придумал дискофокс, был очень суеверным и считал 3 счастливым числом \uD83D\uDE04\n" +
@@ -64,7 +64,7 @@ public class LocalDataSource implements DataSource {
                 "https://pp.userapi.com/c844417/v844417978/ab91e/f45YHntg-cY.jpg",
                 "https://vk.com/ivara?w=wall-7037976_11934");
 
-        News personal = new News(NewsType.ALERT, "Ученики начинающей группы закончили курс прододжающие", "", "", "");
+        News personal = new News(NewsType.PERSONAL, "Ученики начинающей группы закончили курс прододжающие", "", "", "");
         News alert = new News(NewsType.ALERT, "Внимание! Занятия переносятся в группе <b>Дамиры и Раисы</b>", "", "", "");
 
         news.add(general);
@@ -83,5 +83,10 @@ public class LocalDataSource implements DataSource {
         news.add(personal);
         news.add(alert);
         return Flowable.just(news);
+    }
+
+    @Override
+    public void saveNews(List<News> news) {
+
     }
 }

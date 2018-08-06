@@ -89,7 +89,7 @@ public class NewsFragment extends DaggerFragment implements BaseView<NewsPresent
     }
 
     public static class NewsListFragment extends Fragment {
-        private final NewsAdapter mAdapter = new NewsAdapter();
+        private NewsAdapter mAdapter;
 
         public void update(List<News> news) {
             mAdapter.updateNews(news);
@@ -104,6 +104,7 @@ public class NewsFragment extends DaggerFragment implements BaseView<NewsPresent
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+            mAdapter = new NewsAdapter(getActivity());
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setAdapter(mAdapter);

@@ -3,7 +3,10 @@
 
 package ru.volha.hustle.ivarastudio.news;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -12,28 +15,37 @@ import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ru.volha.hustle.ivarastudio.R;
 import ru.volha.hustle.ivarastudio.data.News;
 import ru.volha.hustle.ivarastudio.data.NewsType;
+import ru.volha.hustle.ivarastudio.util.TopCropImageView;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.BaseNewsViewHolder> {
 
     private final static int TYPE_SHORT = 1;
     private final static int TYPE_BIG = 2;
-    private List<News> mNewsList;
+    private List<News> mNewsList = new ArrayList<>();
+    private Activity mActivity;
+
+    public NewsAdapter(Activity activity) {
+        mActivity = activity;
+    }
 
     public void updateNews(List<News> newsList) {
-        mNewsList = newsList;
-        notifyDataSetChanged();
+        if (newsList != null) {
+            mNewsList = newsList;
+            notifyDataSetChanged();
+        }
     }
 
     @NonNull
@@ -63,7 +75,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.BaseNewsViewHo
     @Override
     public int getItemViewType(int position) {
         News news = mNewsList.get(position);
-        switch (news.newsType) {
+        switch (news.type) {
             case NewsType.GENERAL:
                 return TYPE_BIG;
             default:
@@ -75,6 +87,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.BaseNewsViewHo
 
         @BindView(R.id.news_title)
         TextView mTitle;
+        News mNews;
 
         BaseNewsViewHolder(View itemView) {
             super(itemView);
@@ -82,12 +95,20 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.BaseNewsViewHo
         }
 
         void bind(News news) {
+            mNews = news;
             mTitle.setText(SpannableString.valueOf(Html.fromHtml(news.title)));
             @ColorRes int color = R.color.tabsColor;
-            if (news.newsType.equals(NewsType.ALERT)) {
+            if (news.type.equals(NewsType.ALERT)) {
                 color = R.color.colorAccentSecondary;
             }
             itemView.setBackgroundColor(mTitle.getContext().getResources().getColor(color));
+        }
+
+        @OnClick(R.id.news_card)
+        void onClick() {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(mNews.detailsUrl));
+            mActivity.startActivity(intent);
         }
     }
 
@@ -97,7 +118,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.BaseNewsViewHo
         TextView mText;
 
         @BindView(R.id.news_image)
-        ImageView mImage;
+        TopCropImageView mImage;
 
         BigNewsViewHolder(View itemView) {
             super(itemView);
@@ -107,7 +128,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.BaseNewsViewHo
         void bind(News news) {
             super.bind(news);
             mText.setText(SpannableString.valueOf(Html.fromHtml(news.text)));
-            Picasso.get().load(news.imageUrl).into(mImage);
+            Picasso.get().load(news.pictureUrl).into(mImage);
         }
     }
 }

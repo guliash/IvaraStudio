@@ -5,25 +5,32 @@ package ru.volha.hustle.ivarastudio.data;
 
 import android.support.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 public class News {
 
     @NonNull
     @NewsType
-    public String newsType;
+    public String type;
 
     public String title;
 
     public String text;
 
-    public String imageUrl;
+    @SerializedName("picture_url")
+    public String pictureUrl;
 
+    @SerializedName("details_url")
     public String detailsUrl;
 
-    public News(@NonNull String newsType, String title, String text, String imageUrl, String detailsUrl) {
-        this.newsType = newsType;
+    public News() {
+    }
+
+    public News(@NonNull String type, String title, String text, String pictureUrl, String detailsUrl) {
+        this.type = type;
         this.title = title;
         this.text = text;
-        this.imageUrl = imageUrl;
+        this.pictureUrl = pictureUrl;
         this.detailsUrl = detailsUrl;
     }
 }

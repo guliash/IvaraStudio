@@ -3,9 +3,14 @@
 
 package ru.volha.hustle.ivarastudio.data.repository.remote;
 
+import java.util.List;
+
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 import retrofit2.http.Field;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import ru.volha.hustle.ivarastudio.data.News;
 import ru.volha.hustle.ivarastudio.data.repository.remote.response.UserResponse;
 
 public interface RemoteApi {
@@ -17,5 +22,8 @@ public interface RemoteApi {
 
     @POST("addUser")
     Single<UserResponse> createNewUser(@Field("Login") String login, @Field("Password") String pwd);
+
+    @GET("news")
+    Flowable<List<News>> getNews();
 
 }

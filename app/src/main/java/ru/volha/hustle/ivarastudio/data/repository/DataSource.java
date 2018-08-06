@@ -12,11 +12,10 @@ import ru.volha.hustle.ivarastudio.data.User;
 
 public interface DataSource {
 
-    Single<User> getUserInfo();
-
-    Single<User> getAndSaveUserInfo(String login, String pwd);
-
+    Single<User> getUserInfo(String login, String pwd);
     void saveUser(User user);
 
-    Flowable<List<News>> getNews();
+    Flowable<List<News>> getNews(boolean forceUpdate);
+
+    void saveNews(List<News> news);
 }

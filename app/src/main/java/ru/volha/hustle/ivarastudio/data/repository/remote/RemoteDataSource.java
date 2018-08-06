@@ -23,12 +23,7 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public Single<User> getUserInfo() {
-        return null;
-    }
-
-    @Override
-    public Single<User> getAndSaveUserInfo(String login, String pwd) {
+    public Single<User> getUserInfo(String login, String pwd) {
         return mApi.getUser(login, pwd)
                 .map(userResponse -> new User(userResponse.ID, login, pwd));
     }
@@ -39,7 +34,12 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public Flowable<List<News>> getNews() {
-        return null;
+    public Flowable<List<News>> getNews(boolean forceUpdate) {
+        return mApi.getNews();
+    }
+
+    @Override
+    public void saveNews(List<News> news) {
+
     }
 }

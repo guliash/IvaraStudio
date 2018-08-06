@@ -27,15 +27,15 @@ public class Repository implements DataSource {
     }
 
 
-    @Override
-    public Single<User> getUserInfo() {
-        return mLocalDataSource.getUserInfo();
-    }
+//    @Override
+//    public Single<User> getUserInfo() {
+//        return mLocalDataSource.getUserInfo();
+//    }
 
     @Override
-    public Single<User> getAndSaveUserInfo(String login, String pwd) {
+    public Single<User> getUserInfo(String login, String pwd) {
         return mRemoteDataSource
-                .getAndSaveUserInfo(login, pwd)
+                .getUserInfo(login, pwd)
                 .doOnSuccess(mLocalDataSource::saveUser);
     }
 
@@ -45,7 +45,25 @@ public class Repository implements DataSource {
     }
 
     @Override
-    public Flowable<List<News>> getNews() {
-        return mLocalDataSource.getNews();
+    public Flowable<List<News>> getNews(boolean forceUpdate) {
+        Flowable<List<News>> remote = getRemoteNews();
+        if (forceUpdate) {
+            return remote;
+        }
+        Flowable<List<News>> local = mLocalDataSource.getNews(forceUpdate);
+        return Flowable.concat(local, remote)
+                .filter(news -> !news.isEmpty())
+                .firstOrError()
+                .toFlowable();
+    }
+
+    @Override
+    public void saveNews(List<News> news) {
+
+    }
+
+    private Flowable<List<News>> getRemoteNews() {
+        return mRemoteDataSource.getNews(true)
+                .doOnNext(mLocalDataSource::saveNews);
     }
 }
