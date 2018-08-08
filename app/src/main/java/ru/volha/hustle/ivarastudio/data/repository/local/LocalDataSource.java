@@ -17,6 +17,7 @@ import io.reactivex.Single;
 import ru.volha.hustle.ivarastudio.data.News;
 import ru.volha.hustle.ivarastudio.data.NewsType;
 import ru.volha.hustle.ivarastudio.data.User;
+import ru.volha.hustle.ivarastudio.data.repository.Dance;
 import ru.volha.hustle.ivarastudio.data.repository.DataSource;
 
 public class LocalDataSource implements DataSource {
@@ -87,6 +88,16 @@ public class LocalDataSource implements DataSource {
 
     @Override
     public void saveNews(List<News> news) {
+
+    }
+
+    @Override
+    public Flowable<List<Dance>> getSchedule(boolean forceUpdate) {
+        return null;
+    }
+
+    @Override
+    public void saveSchedule(List<Dance> groups) {
 
     }
 }

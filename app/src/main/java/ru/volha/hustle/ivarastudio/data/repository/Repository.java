@@ -26,12 +26,6 @@ public class Repository implements DataSource {
         mLocalDataSource = localDataSource;
     }
 
-
-//    @Override
-//    public Single<User> getUserInfo() {
-//        return mLocalDataSource.getUserInfo();
-//    }
-
     @Override
     public Single<User> getUserInfo(String login, String pwd) {
         return mRemoteDataSource
@@ -59,6 +53,25 @@ public class Repository implements DataSource {
 
     @Override
     public void saveNews(List<News> news) {
+
+    }
+
+    @Override
+    public Flowable<List<Dance>> getSchedule(boolean forceUpdate) {
+        Flowable<List<Dance>> remote = mRemoteDataSource.getSchedule(true)
+                .doOnNext(mLocalDataSource::saveSchedule);
+        if (forceUpdate) {
+            return remote;
+        }
+        Flowable<List<Dance>> local = mLocalDataSource.getSchedule(forceUpdate);
+        return Flowable.concat(local, remote)
+                .filter(news -> !news.isEmpty())
+                .firstOrError()
+                .toFlowable();
+    }
+
+    @Override
+    public void saveSchedule(List<Dance> groups) {
 
     }
 

@@ -7,6 +7,7 @@ import ru.volha.hustle.ivarastudio.contacts.ContactsModule;
 import ru.volha.hustle.ivarastudio.news.NewsFragment;
 import ru.volha.hustle.ivarastudio.news.NewsModule;
 import ru.volha.hustle.ivarastudio.places.PlacesModule;
+import ru.volha.hustle.ivarastudio.schedule.ScheduleFragment;
 import ru.volha.hustle.ivarastudio.schedule.ScheduleModule;
 import ru.volha.hustle.ivarastudio.settings.SettingsModule;
 import ru.volha.hustle.ivarastudio.user_profile.UserProfileModule;
@@ -31,5 +32,9 @@ public abstract class MainActivityModule {
     @FragmentScoped
     @ContributesAndroidInjector
     abstract NewsFragment newsFragment();
+
+    @FragmentScoped
+    @ContributesAndroidInjector
+    abstract ScheduleFragment scheduleFragment();
 
 }

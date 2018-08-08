@@ -16,6 +16,9 @@ public interface DataSource {
     void saveUser(User user);
 
     Flowable<List<News>> getNews(boolean forceUpdate);
-
     void saveNews(List<News> news);
+
+    Flowable<List<Dance>> getSchedule(boolean forceUpdate);
+
+    void saveSchedule(List<Dance> groups);
 }

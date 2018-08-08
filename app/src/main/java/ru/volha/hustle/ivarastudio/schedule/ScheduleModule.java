@@ -3,14 +3,15 @@
 
 package ru.volha.hustle.ivarastudio.schedule;
 
+import dagger.Binds;
 import dagger.Module;
-import dagger.android.ContributesAndroidInjector;
+import ru.volha.hustle.ivarastudio.BasePresenter;
 import ru.volha.hustle.ivarastudio.di.FragmentScoped;
 
 @Module
 public abstract class ScheduleModule {
 
     @FragmentScoped
-    @ContributesAndroidInjector
-    abstract ScheduleFragment newsFragment();
+    @Binds
+    abstract BasePresenter<ScheduleFragment> schedulePresenter(SchedulePresenter presenter);
 }

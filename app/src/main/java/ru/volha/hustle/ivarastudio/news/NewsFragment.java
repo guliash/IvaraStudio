@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,8 +23,10 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import dagger.android.support.DaggerFragment;
 import ru.volha.hustle.ivarastudio.BaseView;
+import ru.volha.hustle.ivarastudio.MainActivity;
 import ru.volha.hustle.ivarastudio.R;
 import ru.volha.hustle.ivarastudio.data.News;
 import ru.volha.hustle.ivarastudio.di.ActivityScoped;
@@ -39,6 +41,7 @@ public class NewsFragment extends DaggerFragment implements BaseView<NewsPresent
     @BindView(R.id.news_tabs)
     TabLayout mTabLayout;
     private NewsPagerAdapter mNewsPagerAdapter;
+    private Unbinder mUnbinder;
 
     @Inject
     public NewsFragment() {
@@ -54,7 +57,8 @@ public class NewsFragment extends DaggerFragment implements BaseView<NewsPresent
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, view);
+        ((MainActivity) getActivity()).getSupportActionBar().setElevation(0);
         mNewsPagerAdapter = new NewsPagerAdapter(getChildFragmentManager());
         mPager.setAdapter(mNewsPagerAdapter);
         mTabLayout.setupWithViewPager(mPager);
@@ -72,7 +76,7 @@ public class NewsFragment extends DaggerFragment implements BaseView<NewsPresent
     public void onDestroy() {
         super.onDestroy();
         mPresenter.end();
-        //mCompositeDisposable.clear();
+        mUnbinder.unbind();
     }
 
     public void setLoadingIndicator(boolean show) {
@@ -111,18 +115,18 @@ public class NewsFragment extends DaggerFragment implements BaseView<NewsPresent
         }
     }
 
-    class NewsPagerAdapter extends FragmentStatePagerAdapter {
+    class NewsPagerAdapter extends FragmentPagerAdapter {
 
         NewsListFragment mMainFragment;
         NewsListFragment mRecommendedFragment;
 
-        public NewsPagerAdapter(FragmentManager fm) {
+        NewsPagerAdapter(FragmentManager fm) {
             super(fm);
             mMainFragment = new NewsListFragment();
             mRecommendedFragment = new NewsListFragment();
         }
 
-        public void updateNews(List<News> mainNews, List<News> recommendedNews) {
+        void updateNews(List<News> mainNews, List<News> recommendedNews) {
             mMainFragment.update(mainNews);
             mRecommendedFragment.update(recommendedNews);
             notifyDataSetChanged();

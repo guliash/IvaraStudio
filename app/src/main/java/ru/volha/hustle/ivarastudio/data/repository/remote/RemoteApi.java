@@ -10,6 +10,7 @@ import io.reactivex.Single;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import ru.volha.hustle.ivarastudio.data.Group;
 import ru.volha.hustle.ivarastudio.data.News;
 import ru.volha.hustle.ivarastudio.data.repository.remote.response.UserResponse;
 
@@ -25,5 +26,8 @@ public interface RemoteApi {
 
     @GET("news")
     Flowable<List<News>> getNews();
+
+    @GET("schedule")
+    Flowable<List<Group>> getGroups();
 
 }

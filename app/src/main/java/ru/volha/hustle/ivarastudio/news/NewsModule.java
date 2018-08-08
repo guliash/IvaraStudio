@@ -11,7 +11,6 @@ import ru.volha.hustle.ivarastudio.di.FragmentScoped;
 @Module
 public abstract class NewsModule {
 
-
     @FragmentScoped
     @Binds
     abstract BasePresenter<NewsFragment> newsPresenter(NewsPresenter presenter);

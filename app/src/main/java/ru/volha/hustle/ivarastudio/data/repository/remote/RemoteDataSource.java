@@ -11,6 +11,7 @@ import io.reactivex.Flowable;
 import io.reactivex.Single;
 import ru.volha.hustle.ivarastudio.data.News;
 import ru.volha.hustle.ivarastudio.data.User;
+import ru.volha.hustle.ivarastudio.data.repository.Dance;
 import ru.volha.hustle.ivarastudio.data.repository.DataSource;
 
 public class RemoteDataSource implements DataSource {
@@ -40,6 +41,24 @@ public class RemoteDataSource implements DataSource {
 
     @Override
     public void saveNews(List<News> news) {
+        //not implemented
+    }
 
+    @Override
+    public Flowable<List<Dance>> getSchedule(boolean forceUpdate) {
+        return mApi.getGroups()
+                .map(groups -> {
+                    Dance dance = new Dance();
+                    dance.danceType = "ALL";
+                    dance.groups = groups;
+                    return dance;
+                })
+                .toList()
+                .toFlowable();
+    }
+
+    @Override
+    public void saveSchedule(List<Dance> groups) {
+        // not implemented
     }
 }
