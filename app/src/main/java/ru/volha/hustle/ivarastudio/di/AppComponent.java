@@ -6,10 +6,8 @@ import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
-import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import ru.volha.hustle.ivarastudio.App;
-import ru.volha.hustle.ivarastudio.data.repository.Repository;
 
 /**
  * This is a Dagger component. Refer to {@link App} for the list of Dagger components
@@ -22,13 +20,11 @@ import ru.volha.hustle.ivarastudio.data.repository.Repository;
 @Singleton
 @Component(modules = {RepositoryModule.class,
         ApplicationModule.class,
-        MainActivityModule.class,
-        AndroidSupportInjectionModule.class})
-public interface AppComponent extends AndroidInjector<App> {
+        AndroidSupportInjectionModule.class,
+        MainActivityBindingModule.class})
+public interface AppComponent {
 
     void inject(App app);
-
-    Repository getRepository();
 
     // Gives us syntactic sugar. we can then do DaggerAppComponent.builder().application(this).build().inject(this);
     // never having to instantiate any modules or say which module we are passing the application to.
