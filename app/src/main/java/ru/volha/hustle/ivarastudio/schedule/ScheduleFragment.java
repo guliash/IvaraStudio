@@ -42,6 +42,9 @@ public class ScheduleFragment extends DaggerFragment implements BaseView<Schedul
     private Unbinder mUnbinder;
     private DanceTypesAdapter mAdapter;
 
+//    @Inject
+//    ScheduleComponent mScheduleComponent;
+
     @Inject
     public ScheduleFragment() {
         // dagger requires
@@ -104,7 +107,7 @@ public class ScheduleFragment extends DaggerFragment implements BaseView<Schedul
 
         @Override
         public Fragment getItem(int position) {
-            return null;
+            return new DanceFragment();
         }
 
         @Override

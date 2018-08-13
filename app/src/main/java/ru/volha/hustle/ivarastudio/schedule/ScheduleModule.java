@@ -11,7 +11,11 @@ import ru.volha.hustle.ivarastudio.di.FragmentScoped;
 @Module
 public abstract class ScheduleModule {
 
-    @FragmentScoped
     @Binds
+    @FragmentScoped
     abstract BasePresenter<ScheduleFragment> schedulePresenter(SchedulePresenter presenter);
+
+//    @ChildFragmentScoped
+//    @ContributesAndroidInjector(modules = DanceModule.class)
+//    abstract DanceFragment mainChildFragmentInjector();
 }
