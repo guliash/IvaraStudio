@@ -42,8 +42,8 @@ public class ScheduleFragment extends DaggerFragment implements BaseView<Schedul
     private Unbinder mUnbinder;
     private DanceTypesAdapter mAdapter;
 
-//    @Inject
-//    ScheduleComponent mScheduleComponent;
+    @Inject
+    ScheduleComponent mScheduleComponent;
 
     @Inject
     public ScheduleFragment() {
@@ -90,6 +90,10 @@ public class ScheduleFragment extends DaggerFragment implements BaseView<Schedul
 
     public void setLoadingIndicator(boolean show) {
 
+    }
+
+    public ScheduleComponent getmScheduleComponent() {
+        return mScheduleComponent;
     }
 
     private static class DanceTypesAdapter extends FragmentPagerAdapter {

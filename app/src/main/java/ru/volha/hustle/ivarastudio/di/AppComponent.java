@@ -36,5 +36,6 @@ public interface AppComponent {
         AppComponent.Builder application(Application application);
 
         AppComponent build();
+
     }
 }

@@ -10,7 +10,7 @@ import ru.volha.hustle.ivarastudio.di.FragmentScoped;
 @Module
 public abstract class VideoModule {
 
-    @FragmentScoped
-    @ContributesAndroidInjector
-    abstract VideoFragment videoFragment();
+//    @FragmentScoped
+//    @ContributesAndroidInjector
+//    abstract VideoFragment videoFragment();
 }

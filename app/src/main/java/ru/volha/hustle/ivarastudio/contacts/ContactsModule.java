@@ -10,7 +10,7 @@ import ru.volha.hustle.ivarastudio.di.FragmentScoped;
 @Module
 public abstract class ContactsModule {
 
-    @FragmentScoped
-    @ContributesAndroidInjector
-    abstract ContactsFragment contactsFragment();
+//    @FragmentScoped
+//    @ContributesAndroidInjector
+//    abstract ContactsFragment contactsFragment();
 }

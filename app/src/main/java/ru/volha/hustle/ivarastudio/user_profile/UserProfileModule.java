@@ -10,7 +10,7 @@ import ru.volha.hustle.ivarastudio.di.FragmentScoped;
 @Module
 public abstract class UserProfileModule {
 
-    @FragmentScoped
-    @ContributesAndroidInjector
-    abstract UserProfileFragment userProfileFragment();
+//    @FragmentScoped
+//    @ContributesAndroidInjector
+//    abstract UserProfileFragment userProfileFragment();
 }

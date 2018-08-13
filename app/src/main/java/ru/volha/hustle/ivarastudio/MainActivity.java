@@ -14,11 +14,8 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.Lazy;
 import dagger.android.support.DaggerAppCompatActivity;
 import ru.volha.hustle.ivarastudio.contacts.ContactsFragment;
 import ru.volha.hustle.ivarastudio.news.NewsFragment;
@@ -30,21 +27,6 @@ import ru.volha.hustle.ivarastudio.util.CropCircleTransformation;
 import ru.volha.hustle.ivarastudio.video.VideoFragment;
 
 public class MainActivity extends DaggerAppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    @Inject
-    Lazy<UserProfileFragment> mUserProfileFragmentProvider;
-    @Inject
-    Lazy<NewsFragment> mNewsFragmentProvider;
-    @Inject
-    Lazy<ScheduleFragment> mScheduleFragmentProvider;
-    @Inject
-    Lazy<ContactsFragment> mContactsFragmentProvider;
-    @Inject
-    Lazy<VideoFragment> mVideoFragmentProvider;
-    @Inject
-    Lazy<PlacesFragment> mPlacesFragmentProvider;
-    @Inject
-    Lazy<SettingsFragment> mSettingsFragmentProvider;
 
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
@@ -142,7 +124,7 @@ public class MainActivity extends DaggerAppCompatActivity implements NavigationV
         UserProfileFragment userProfileFragment = (UserProfileFragment) getSupportFragmentManager()
                 .findFragmentByTag("fragment_user_profile");
         if (userProfileFragment == null) {
-            userProfileFragment = mUserProfileFragmentProvider.get();
+            userProfileFragment = new UserProfileFragment();
         }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contentFrame, userProfileFragment, "fragment_user_profile")
@@ -153,7 +135,7 @@ public class MainActivity extends DaggerAppCompatActivity implements NavigationV
         NewsFragment fragment = (NewsFragment) getSupportFragmentManager()
                 .findFragmentByTag("fragment_news");
         if (fragment == null) {
-            fragment = mNewsFragmentProvider.get();
+            fragment = new NewsFragment();
         }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contentFrame, fragment, "fragment_news")
@@ -164,7 +146,7 @@ public class MainActivity extends DaggerAppCompatActivity implements NavigationV
         ScheduleFragment fragment = (ScheduleFragment) getSupportFragmentManager()
                 .findFragmentByTag("fragment_schedule");
         if (fragment == null) {
-            fragment = mScheduleFragmentProvider.get();
+            fragment = new ScheduleFragment();
         }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contentFrame, fragment, "fragment_schedule")
@@ -175,7 +157,7 @@ public class MainActivity extends DaggerAppCompatActivity implements NavigationV
         ContactsFragment fragment = (ContactsFragment) getSupportFragmentManager()
                 .findFragmentByTag("fragment_contacts");
         if (fragment == null) {
-            fragment = mContactsFragmentProvider.get();
+            fragment = new ContactsFragment();
         }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contentFrame, fragment, "fragment_contacts")
@@ -186,7 +168,7 @@ public class MainActivity extends DaggerAppCompatActivity implements NavigationV
         VideoFragment fragment = (VideoFragment) getSupportFragmentManager()
                 .findFragmentByTag("fragment_video");
         if (fragment == null) {
-            fragment = mVideoFragmentProvider.get();
+            fragment = new VideoFragment();
         }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contentFrame, fragment, "fragment_video")
@@ -197,7 +179,7 @@ public class MainActivity extends DaggerAppCompatActivity implements NavigationV
         PlacesFragment fragment = (PlacesFragment) getSupportFragmentManager()
                 .findFragmentByTag("fragment_places");
         if (fragment == null) {
-            fragment = mPlacesFragmentProvider.get();
+            fragment = new PlacesFragment();
         }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contentFrame, fragment, "fragment_places")
@@ -208,7 +190,7 @@ public class MainActivity extends DaggerAppCompatActivity implements NavigationV
         SettingsFragment fragment = (SettingsFragment) getSupportFragmentManager()
                 .findFragmentByTag("fragment_settings");
         if (fragment == null) {
-            fragment = mSettingsFragmentProvider.get();
+            fragment = new SettingsFragment();
         }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contentFrame, fragment, "fragment_settings")

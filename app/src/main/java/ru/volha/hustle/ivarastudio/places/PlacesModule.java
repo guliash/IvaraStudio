@@ -10,7 +10,7 @@ import ru.volha.hustle.ivarastudio.di.FragmentScoped;
 @Module
 public abstract class PlacesModule {
 
-    @FragmentScoped
-    @ContributesAndroidInjector
-    abstract PlacesFragment placesFragment();
+//    @FragmentScoped
+//    @ContributesAndroidInjector
+//    abstract PlacesFragment placesFragment();
 }

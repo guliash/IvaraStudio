@@ -11,6 +11,8 @@ import ru.volha.hustle.ivarastudio.di.FragmentScoped;
 @FragmentScoped
 public interface ScheduleComponent extends AndroidInjector<ScheduleFragment> {
 
+    DanceComponent.Builder danceComponentBuilder();
+
     @Subcomponent.Builder
     public abstract class Builder extends AndroidInjector.Builder<ScheduleFragment> {
     }
